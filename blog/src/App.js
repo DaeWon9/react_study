@@ -8,7 +8,7 @@ function App() {
   let [title, changeTitle] = useState(['남자 코트 추천', '남자 니트 추천']);
   let [upCount, changeUpCount] = useState(0);
 
-  function changeTitleOnClick() {
+  function changeTitleOnClick() { // 복사본을 만들어서 사용하자
     var titleArray = [...title]; //deep copy
     titleArray[1] = '여자 니트 추천';
     changeTitle( titleArray );
@@ -27,8 +27,21 @@ function App() {
       </div>
 
       <button onClick={ changeTitleOnClick }> ChangeButton </button>
+      
+      <Modal/>
+
     </div>
   );
+}
+
+function Modal(){ // component
+  return (
+    <div className="modal">
+    <h2>제목</h2>
+    <p>날짜</p>
+    <p>상세내용</p>
+    </div>
+  )
 }
 
 export default App;
