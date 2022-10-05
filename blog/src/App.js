@@ -1,12 +1,17 @@
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  // state는 변경되면 html이 자동으로 재렌더링이 된다.
+  // -> 자주 바뀌는 변수는 state로
+  let [title, changeTitle] = useState(['남자 코트 추천', '남자 니트 추천']);
+  let [upCount, changeUpCount] = useState(0);
 
-  let posts = '바인딩 테스트'; 
-
-  function test(){
-    return 100;
+  function changeTitleOnClick() {
+    var titleArray = [...title]; //deep copy
+    titleArray[1] = '여자 니트 추천';
+    changeTitle( titleArray );
   }
 
   return (
@@ -14,8 +19,14 @@ function App() {
       <div className="black-nav">
         <div>개발 Blog</div>
       </div>
-      <img src={ logo }></img>
-      <h4>{ posts }</h4>
+      
+      <div className='list'>
+        <h3>{ title[1] } <span onClick={ ()=>{changeUpCount(upCount+1)} }> 👍 </span> { upCount } </h3>
+        <p>10월 5일 발행</p>
+        <hr/>
+      </div>
+
+      <button onClick={ changeTitleOnClick }> ChangeButton </button>
     </div>
   );
 }
