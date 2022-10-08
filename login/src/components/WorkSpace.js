@@ -1,4 +1,5 @@
 import React from 'react';
+import './WorkSpace.css';
 //Importing bootstrap and other modules
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
