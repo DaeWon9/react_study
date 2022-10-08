@@ -1,7 +1,23 @@
 import './Login.css';
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = function () {
+
+    let [email, setEmail] = useState("");
+    let [password, setPassword] = useState("");
+    
+    let navigate = useNavigate();
+
+    function checkLoggedInSuccessed() {
+        if (email == "test@naver.com" && password == "qwe123!"){
+            navigate("/workSpace")
+        }
+        else{
+            alert("올바른 정보를 입력해주세요")
+        }
+    }
+
     return(
         <div className="Auth-form-container">
             <form className="Auth-form">
@@ -13,6 +29,8 @@ const Login = function () {
                     type="email"
                     className="form-control mt-1"
                     placeholder="Enter email"
+                    value={ email }
+                    onChange={e => setEmail(e.target.value)}
                 />
                 </div>
                 <div className="form-group mt-3">
@@ -21,14 +39,15 @@ const Login = function () {
                     type="password"
                     className="form-control mt-1"
                     placeholder="Enter password"
+                    value={ password }
+                    onChange={e => setPassword(e.target.value)}
                 />
                 </div>
                 <div className="d-grid gap-2 mt-3">
             
-                <Link to="/workSpace" className="btn btn-primary"> Submit</Link>
-                {/* <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary" onClick={ checkLoggedInSuccessed }>
                     Submit
-                </button> */}
+                </button>
             
                 </div>
                 <p className="forgot-password text-right mt-2">
