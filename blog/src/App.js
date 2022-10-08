@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -10,6 +9,7 @@ function App() {
 
   function changeTitleOnClick() { // 복사본을 만들어서 사용하자
     var titleArray = [...title]; //deep copy
+    titleArray[0] = '여자 코트 추천';
     titleArray[1] = '여자 니트 추천';
     changeTitle( titleArray );
   }
@@ -18,6 +18,12 @@ function App() {
     <div className="App">
       <div className="black-nav">
         <div>개발 Blog</div>
+      </div>
+
+      <div className='list'>
+        <h3>{ title[0] } <span onClick={ ()=>{changeUpCount(upCount+1)} }> 👍 </span> { upCount } </h3>
+        <p>10월 5일 발행</p>
+        <hr/>
       </div>
       
       <div className='list'>
