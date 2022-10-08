@@ -1,4 +1,5 @@
 import './Login.css';
+import { Link } from "react-router-dom";
 
 const Login = function () {
     return(
@@ -23,9 +24,12 @@ const Login = function () {
                 />
                 </div>
                 <div className="d-grid gap-2 mt-3">
-                <button type="submit" className="btn btn-primary">
+            
+                <Link to="/workSpace" className="btn btn-primary"> Submit</Link>
+                {/* <button type="submit" className="btn btn-primary">
                     Submit
-                </button>
+                </button> */}
+            
                 </div>
                 <p className="forgot-password text-right mt-2">
                 Forgot <a href="#">password?</a>
