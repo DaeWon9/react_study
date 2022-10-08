@@ -6,10 +6,10 @@ const Login = function () {
 
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
-    
+
     let navigate = useNavigate();
 
-    function checkLoggedInSuccessed() {
+    function checkLoginSuccess() {
         if (email == "test@naver.com" && password == "qwe123!"){
             navigate("/workSpace")
         }
@@ -45,7 +45,7 @@ const Login = function () {
                 </div>
                 <div className="d-grid gap-2 mt-3">
             
-                <button type="submit" className="btn btn-primary" onClick={ checkLoggedInSuccessed }>
+                <button type="submit" className="btn btn-primary" onClick={ checkLoginSuccess }>
                     Submit
                 </button>
             
