@@ -10,13 +10,59 @@ const WorkSpace = function () {
     const location = useLocation();
     const loginUserName = location.state.loginUserName;
 
+    const workspaceInfo = [
+        {
+            workspaceId: '1',
+            workspaceName: '오픈소스과제',
+            workspaceGoal: '오픈소스 프로젝트 제작',
+            workspaceDeadline: '2022-10-30'
+        }
+    ];
+
+    const departmentInfo = [
+        {
+            departmentId: '1',
+            departmentName: '📢 공지방',
+            departmentGoal: '',
+            departmentDeadLine: ''
+        },
+        {
+            departmentId: '2',
+            departmentName: '아이디어방',
+            departmentGoal: '아이디어 정하기',
+            departmentDeadLine: '2022-10-10'
+        },
+        {
+            departmentId: '3',
+            departmentName: '코딩방',
+            departmentGoal: '프로젝트 완성',
+            departmentDeadLine: '2022-10-29'
+        }
+    ]
+
+    function applyDepartmentList() {
+        let htmlArrayForDepartmentList = [];
+
+        for (let index = 0; index < departmentInfo.length; index++) {
+            htmlArrayForDepartmentList.push(
+                    // departmentList form
+                    <div class="list-group rounded-0">
+                    <a class="list-group-item list-group-item-action active text-white rounded-0">
+                        <h6 class="mb-0">{ departmentInfo[index].departmentName }</h6>
+                    </a>
+                    </div>
+                )
+        }
+        return htmlArrayForDepartmentList
+    }
+
     return(
     <div className="maincontainer">
         <div class="container py-5 px-0">
         
-            <header class="text-center">
+            {/* <header class="text-center">
                 <h5 class="display-4 text-white"><strong>loginUser: { loginUserName }</strong></h5>
-            </header>
+            </header> */}
 
             <div class="row rounded-lg overflow-hidden shadow">
                 {/* left */}
@@ -35,17 +81,18 @@ const WorkSpace = function () {
 
                 {/* left center */}
                 <div class="col-2 px-0">
+                    {/* workspace info */}
                     <div class="bg-gray px-4 py-2 bg-light">
-                        <p class="h5 mb-0 py-1">WorkSpace</p>
+                        <p class="h5 mb-0 py-1">{ workspaceInfo[0].workspaceName }</p>
                     </div>
 
                     <div class="messages-box">
-                        {/* workspace info */}
+                        {/* loginUser info */}
                         <div class="list-group rounded-0">
                         <a class="list-group-item list-group-item-action active text-white rounded-0">
                             <div class="media">
                                 <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" alt="user" width="50" class="rounded-circle" />
-                                <h8 class="mb-0">TestUser</h8>
+                                <h8 class="mb-0">{ loginUserName }</h8>
                             </div>
                         </a>
                         </div>
@@ -55,11 +102,7 @@ const WorkSpace = function () {
                             <p class="h7 mb-0 py-1">DepartmentList</p>
                         </div>
 
-                        <div class="list-group rounded-0">
-                        <a class="list-group-item list-group-item-action active text-white rounded-0">
-                            <h6 class="mb-0">📢 NoticeRoom</h6>
-                        </a>
-                        </div>
+                        { applyDepartmentList() }
                         
                         {/* whole member List */}
                         <div class="bg-gray px-4 py-2 bg-light">
