@@ -3,16 +3,20 @@ import './WorkSpace.css';
 //Importing bootstrap and other modules
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
+import { useLocation } from "react-router";
 
 
 const WorkSpace = function () {
+    const location = useLocation();
+    const loginUserName = location.state.loginUserName;
+
     return(
     <div className="maincontainer">
         <div class="container py-5 px-0">
         
-            {/* <header class="text-center">
-            <h1 class="display-4 text-white"><strong>TEST</strong></h1>
-            </header> */}
+            <header class="text-center">
+                <h5 class="display-4 text-white"><strong>loginUser: { loginUserName }</strong></h5>
+            </header>
 
             <div class="row rounded-lg overflow-hidden shadow">
                 {/* left */}

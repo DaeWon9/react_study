@@ -29,7 +29,9 @@ const Login = function () {
     function checkLoginSuccess() {
         for (let userIndex = 0; userIndex < userData.length; userIndex++) {
             if (email == userData[userIndex].userEmail && password == userData[userIndex].userPassword){
-                navigate("/workSpace")
+                navigate("/workSpace", { state:
+                    { loginUserName: userData[userIndex].userName} 
+                })
                 return;
             }
         }
