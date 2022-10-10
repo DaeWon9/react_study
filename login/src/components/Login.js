@@ -12,17 +12,32 @@ const Login = function () {
         {
             userEmail: 'test1@naver.com',
             userPassword: 'qwe123!',
-            userName: '유저1'
+            userName: '박대원'
         },
         {
             userEmail: 'test2@naver.com',
             userPassword: 'qwe123@',
-            userName: '유저2'
+            userName: '조형준'
         },
         {
             userEmail: 'test3@naver.com',
             userPassword: 'qwe123#',
-            userName: '유저3'
+            userName: '박민지'
+        },
+        {
+            userEmail: 'test3@naver.com',
+            userPassword: 'qwe123#',
+            userName: '홍영환'
+        },
+        {
+            userEmail: 'test3@naver.com',
+            userPassword: 'qwe123#',
+            userName: '조준희'
+        },
+        {
+            userEmail: 'test3@naver.com',
+            userPassword: 'qwe123#',
+            userName: '김영림'
         },
     ];
 

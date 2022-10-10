@@ -10,6 +10,52 @@ const WorkSpace = function () {
     const location = useLocation();
     const loginUserName = location.state.loginUserName;
 
+    const wholeUserData = [
+        {
+            userEmail: 'test1@naver.com',
+            userPassword: 'qwe123!',
+            userName: '박대원'
+        },
+        {
+            userEmail: 'test2@naver.com',
+            userPassword: 'qwe123@',
+            userName: '조형준'
+        },
+        {
+            userEmail: 'test3@naver.com',
+            userPassword: 'qwe123#',
+            userName: '박민지'
+        },
+        {
+            userEmail: 'test3@naver.com',
+            userPassword: 'qwe123#',
+            userName: '홍영환'
+        },
+        {
+            userEmail: 'test3@naver.com',
+            userPassword: 'qwe123#',
+            userName: '조준희'
+        },
+        {
+            userEmail: 'test3@naver.com',
+            userPassword: 'qwe123#',
+            userName: '김영림'
+        },
+    ];
+
+    const departmentUserData = [
+        {
+            userEmail: 'test1@naver.com',
+            userPassword: 'qwe123!',
+            userName: '조형준'
+        },
+        {
+            userEmail: 'test2@naver.com',
+            userPassword: 'qwe123@',
+            userName: '박민지'
+        },
+    ]
+
     const workspaceInfo = [
         {
             workspaceId: '1',
@@ -56,6 +102,26 @@ const WorkSpace = function () {
         return htmlArrayForDepartmentList
     }
 
+    function applyMemberList(userData) {
+        let htmlArrayForWholeMemberList = [];
+
+        for (let index = 0; index < userData.length; index++) {
+            htmlArrayForWholeMemberList.push(
+                    // userCard form
+                    <div class="list-group rounded-0">
+                    <a class="list-group-item list-group-item-action active text-white rounded-0">
+                        <div class="media">
+                            <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" alt="user" width="25" class="rounded-circle" />
+
+                            <h8 class="mb-0"> { userData[index].userName }</h8>
+                        </div>
+                    </a>
+                    </div>
+                )
+        }
+        return htmlArrayForWholeMemberList
+    }
+
     return(
     <div className="maincontainer">
         <div class="container py-5 px-0">
@@ -91,7 +157,7 @@ const WorkSpace = function () {
                         <div class="list-group rounded-0">
                         <a class="list-group-item list-group-item-action active text-white rounded-0">
                             <div class="media">
-                                <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" alt="user" width="50" class="rounded-circle" />
+                                <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" alt="user" width="25" class="rounded-circle" />
                                 <h8 class="mb-0">{ loginUserName }</h8>
                             </div>
                         </a>
@@ -106,17 +172,10 @@ const WorkSpace = function () {
                         
                         {/* whole member List */}
                         <div class="bg-gray px-4 py-2 bg-light">
-                            <p class="h7 mb-0 py-1">MemberList</p>
+                            <p class="h7 mb-0 py-1">WholeMemberList</p>
                         </div>
 
-                        <div class="list-group rounded-0">
-                        <a class="list-group-item list-group-item-action active text-white rounded-0">
-                            <div class="media">
-                                <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" alt="user" width="50" class="rounded-circle" />
-                                <h8 class="mb-0">TestUser</h8>
-                            </div>
-                        </a>
-                        </div>
+                        { applyMemberList(wholeUserData) }
 
                     </div>
                 </div>
@@ -124,7 +183,7 @@ const WorkSpace = function () {
                 {/* right center */}
                 <div class="col-7 px-0">
                     <div class="bg-gray px-4 py-2 bg-light">
-                        <p class="h5 mb-0 py-1">📢 NoticeRoom</p>
+                        <p class="h5 mb-0 py-1">{ departmentInfo[0].departmentName } </p>
                     </div>
 
                     <div class="px-4 py-5 chat-box bg-white">
@@ -186,19 +245,10 @@ const WorkSpace = function () {
                 <div class="col-2 px-0">
 
                     <div class="bg-gray px-4 py-2 bg-light">
-                        <p class="h5 mb-0 py-1">MemberList</p>
+                        <p class="h5 mb-0 py-1"> 참여자 </p>
                     </div>
 
-                    <div class="messages-box">
-                        <div class="list-group rounded-0">
-                            <a class="list-group-item list-group-item-action active text-white rounded-0">
-                                <div class="media">
-                                    <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" alt="user" width="50" class="rounded-circle" />
-                                    <h8 class="mb-0">TestUser</h8>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    { applyMemberList(departmentUserData) }
 
                 </div>
 
