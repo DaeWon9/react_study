@@ -62,12 +62,12 @@ const WorkSpace = function () {
             {
                 userEmail: 'test1@naver.com',
                 userPassword: 'qwe123!',
-                userName: {departmentName} + '조형준'
+                userName: departmentName + ' 조형준'
             },
             {
                 userEmail: 'test2@naver.com',
                 userPassword: 'qwe123@',
-                userName: {departmentName} + '박민지'
+                userName: departmentName + ' 박민지'
             },
         ];
 
@@ -113,7 +113,7 @@ const WorkSpace = function () {
                     // departmentList form
                     <div class="list-group rounded-0">
                     <a class="list-group-item list-group-item-action active text-white rounded-0">
-                        <h6 class="mb-0" onClick={ () => setDepartmentUser({departmentName}) }>{ departmentName }</h6>
+                        <h6 class="mb-0" onClick={ () => setDepartmentUser(departmentName) }>{ departmentName }</h6>
                     </a>
                     </div>
                 )
