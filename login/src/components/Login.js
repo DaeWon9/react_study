@@ -6,16 +6,34 @@ const Login = function () {
 
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
-
     let navigate = useNavigate();
 
+    let userData = [
+        {
+            userEmail: 'test1@naver.com',
+            userPassword: 'qwe123!',
+            userName: '유저1'
+        },
+        {
+            userEmail: 'test2@naver.com',
+            userPassword: 'qwe123@',
+            userName: '유저2'
+        },
+        {
+            userEmail: 'test3@naver.com',
+            userPassword: 'qwe123#',
+            userName: '유저3'
+        },
+    ];
+
     function checkLoginSuccess() {
-        if (email == "test@naver.com" && password == "qwe123!"){
-            navigate("/workSpace")
+        for (let userIndex = 0; userIndex < userData.length; userIndex++) {
+            if (email == userData[userIndex].userEmail && password == userData[userIndex].userPassword){
+                navigate("/workSpace")
+                return;
+            }
         }
-        else{
-            alert("올바른 정보를 입력해주세요")
-        }
+        alert("올바른 정보를 입력해주세요")
     }
 
     return(
