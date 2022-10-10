@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './WorkSpace.css';
 //Importing bootstrap and other modules
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
+import Modal from 'react-modal';
 import { useLocation } from "react-router";
-
 
 const WorkSpace = function () {
     const location = useLocation();
     const loginUserName = location.state.loginUserName;
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const wholeUserData = [
         {
@@ -43,7 +44,7 @@ const WorkSpace = function () {
         },
     ];
 
-    const departmentUserData = [
+    const [departmentUserData, setDepartmentUserData] = useState([
         {
             userEmail: 'test1@naver.com',
             userPassword: 'qwe123!',
@@ -54,7 +55,24 @@ const WorkSpace = function () {
             userPassword: 'qwe123@',
             userName: '박민지'
         },
-    ]
+    ]);
+
+    function setDepartmentUser(departmentName) {
+        const userData = [
+            {
+                userEmail: 'test1@naver.com',
+                userPassword: 'qwe123!',
+                userName: {departmentName} + '조형준'
+            },
+            {
+                userEmail: 'test2@naver.com',
+                userPassword: 'qwe123@',
+                userName: {departmentName} + '박민지'
+            },
+        ];
+
+        setDepartmentUserData(userData);
+    }
 
     const workspaceInfo = [
         {
@@ -84,17 +102,18 @@ const WorkSpace = function () {
             departmentGoal: '프로젝트 완성',
             departmentDeadLine: '2022-10-29'
         }
-    ]
-
+    ];
+    
     function applyDepartmentList() {
         let htmlArrayForDepartmentList = [];
 
         for (let index = 0; index < departmentInfo.length; index++) {
+            const departmentName = departmentInfo[index].departmentName
             htmlArrayForDepartmentList.push(
                     // departmentList form
                     <div class="list-group rounded-0">
                     <a class="list-group-item list-group-item-action active text-white rounded-0">
-                        <h6 class="mb-0">{ departmentInfo[index].departmentName }</h6>
+                        <h6 class="mb-0" onClick={ () => setDepartmentUser({departmentName}) }>{ departmentName }</h6>
                     </a>
                     </div>
                 )
@@ -165,7 +184,11 @@ const WorkSpace = function () {
                     
                         {/* department List */}
                         <div class="bg-gray px-4 py-2 bg-light">
-                            <p class="h7 mb-0 py-1">DepartmentList</p>
+                            <p class="h7 mb-0 py-1">DepartmentList <button onClick={()=> setModalIsOpen(true)}>+</button> </p>
+                            {/* <Modal isOpen={true}>
+                                This is Modal content
+                                <button onClick={()=> setModalIsOpen(false)}>+</button>
+                            </Modal> */}
                         </div>
 
                         { applyDepartmentList() }
