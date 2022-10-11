@@ -9,8 +9,10 @@ import { useLocation } from "react-router";
 let WorkSpace = function () {
     let location = useLocation();
     let loginUserName = location.state.loginUserName;
-    let [accessedDepartmentName, setAccessedDepartmentName] = useState("");
+    let loginUserEmail = location.state.loginUserEmail;
+    let [accessedDepartmentName, setAccessedDepartmentName] = useState("📢 공지방");
     let [modalIsOpen, setModalIsOpen] = useState(false);
+    let [inputChattingContent,  setInputChattingContent] = useState("");
 
     let [chattingData, setChattingData] = useState([
         {
@@ -59,6 +61,24 @@ let WorkSpace = function () {
             link: "",
         }
     ]);
+
+    function addChattingDataToDB(chatContent, departmentId, departmentName) {
+        let copiedChattingData = [...chattingData];
+        copiedChattingData.push({
+            workspaceId: "1",
+            departmentId: departmentId, 
+            email: loginUserEmail,
+            content: chatContent,
+            date: "2022-10-11",
+            content_type: "TEXT",
+            link: "",
+        })
+
+        console.log(copiedChattingData);
+        setChattingData(copiedChattingData);
+        console.log(chattingData);
+        setDepartmentScreen(departmentId, departmentName);
+    };
 
     let [departmentChattingData, setDepartmentChattingData] = useState([]);
 
@@ -215,7 +235,7 @@ let WorkSpace = function () {
                         <div class="media">
                             <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" alt="user" width="25" class="rounded-circle" />
 
-                            <h8 class="mb-0"> { userData[index].userName }</h8>
+                            <h7 class="mb-0"> { userData[index].userName }</h7>
                         </div>
                     </a>
                     </div>
@@ -260,7 +280,7 @@ let WorkSpace = function () {
                         <a class="list-group-item list-group-item-action active text-white rounded-0">
                             <div class="media">
                                 <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" alt="user" width="25" class="rounded-circle" />
-                                <h8 class="mb-0">{ loginUserName }</h8>
+                                <h6 class="mb-0">{ loginUserName }</h6>
                             </div>
                         </a>
                         </div>
@@ -297,13 +317,14 @@ let WorkSpace = function () {
                     </div>
 
                 
-                    <form action="#" class="bg-light">
-                    <div class="input-group">
-                        <input type="text" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light" />
-                        <div class="input-group-append">
-                        <button id="button-addon2" type="button" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
+                    <form class="bg-light">
+                        <div class="input-group">
+                            <input type="text" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light" value={ inputChattingContent }
+                                onChange={e => setInputChattingContent(e.target.value)}/>
+                            <div class="input-group-append">
+                            <button id="button-addon2" type="button" class="btn btn-link" onClick={ () => addChattingDataToDB(inputChattingContent, "3", accessedDepartmentName) }> send <i class="fa fa-paper-plane"></i></button>
+                            </div>
                         </div>
-                    </div>
                     </form>
 
                 </div>
