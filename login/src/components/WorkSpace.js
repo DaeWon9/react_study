@@ -11,6 +11,7 @@ let WorkSpace = function () {
     let loginUserName = location.state.loginUserName;
     let loginUserEmail = location.state.loginUserEmail;
     let [accessedDepartmentName, setAccessedDepartmentName] = useState("📢 공지방");
+    let [accessedDepartmentId, setAccessedDepartmentId] = useState("1");
     let [modalIsOpen, setModalIsOpen] = useState(false);
     let [inputChattingContent,  setInputChattingContent] = useState("");
 
@@ -62,11 +63,11 @@ let WorkSpace = function () {
         }
     ]);
 
-    function addChattingDataToDB(chatContent, departmentId, departmentName) {
+    function addChattingDataToDB(chatContent) {
         let copiedChattingData = [...chattingData];
         copiedChattingData.push({
             workspaceId: "1",
-            departmentId: departmentId, 
+            departmentId: accessedDepartmentId, 
             email: loginUserEmail,
             content: chatContent,
             date: "2022-10-11",
@@ -74,11 +75,12 @@ let WorkSpace = function () {
             link: "",
         })
 
-        console.log(copiedChattingData);
         setChattingData(copiedChattingData);
-        console.log(chattingData);
-        setDepartmentScreen(departmentId, departmentName);
-    };
+    }
+
+    useEffect( () => {
+        setDepartmentScreen(accessedDepartmentId, accessedDepartmentName);
+    }, [chattingData]);
 
     let [departmentChattingData, setDepartmentChattingData] = useState([]);
 
@@ -172,6 +174,7 @@ let WorkSpace = function () {
             },
         ];
         setAccessedDepartmentName(departmentName);
+        setAccessedDepartmentId(departmentId);
         setChattingDataEachDepartment(departmentId);
         setDepartmentUserData(userData);
     }
@@ -280,7 +283,7 @@ let WorkSpace = function () {
                         <a class="list-group-item list-group-item-action active text-white rounded-0">
                             <div class="media">
                                 <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" alt="user" width="25" class="rounded-circle" />
-                                <h6 class="mb-0">{ loginUserName }</h6>
+                                <h7 class="mb-0">{ loginUserName }</h7>
                             </div>
                         </a>
                         </div>
@@ -322,7 +325,7 @@ let WorkSpace = function () {
                             <input type="text" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light" value={ inputChattingContent }
                                 onChange={e => setInputChattingContent(e.target.value)}/>
                             <div class="input-group-append">
-                            <button id="button-addon2" type="button" class="btn btn-link" onClick={ () => addChattingDataToDB(inputChattingContent, "3", accessedDepartmentName) }> send <i class="fa fa-paper-plane"></i></button>
+                            <button id="button-addon2" type="button" class="btn btn-link" onClick={ () => addChattingDataToDB(inputChattingContent) }> send <i class="fa fa-paper-plane"></i></button>
                             </div>
                         </div>
                     </form>
