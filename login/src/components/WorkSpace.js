@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './WorkSpace.css';
 //Importing bootstrap and other modules
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -6,12 +6,93 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import Modal from 'react-modal';
 import { useLocation } from "react-router";
 
-const WorkSpace = function () {
-    const location = useLocation();
-    const loginUserName = location.state.loginUserName;
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+let WorkSpace = function () {
+    let location = useLocation();
+    let loginUserName = location.state.loginUserName;
+    let [accessedDepartmentName, setAccessedDepartmentName] = useState("");
+    let [modalIsOpen, setModalIsOpen] = useState(false);
 
-    const wholeUserData = [
+    let [chattingData, setChattingData] = useState([
+        {
+            workspaceId: "1", // 오픈소스과제
+            departmentId: "1", //공지방
+            email: "test1@naver.com",
+            content: "TEST CHAT1",
+            date: "2022-10-11",
+            content_type: "TEXT",
+            link: "",
+        },
+        {
+            workspaceId: "1", // 오픈소스과제
+            departmentId: "1", //공지방
+            email: "test1@naver.com",
+            content: "TEST CHAT2",
+            date: "2022-10-11",
+            content_type: "TEXT",
+            link: "",
+        },
+        {
+            workspaceId: "1", // 오픈소스과제
+            departmentId: "2",
+            email: "test1@naver.com",
+            content: "TEST CHAT3",
+            date: "2022-10-11",
+            content_type: "TEXT",
+            link: "",
+        },        
+        {
+            workspaceId: "1", // 오픈소스과제
+            departmentId: "2", 
+            email: "test1@naver.com",
+            content: "TEST CHAT4",
+            date: "2022-10-11",
+            content_type: "TEXT",
+            link: "",
+        },        
+        {
+            workspaceId: "1", // 오픈소스과제
+            departmentId: "3", 
+            email: "test1@naver.com",
+            content: "TEST CHAT5",
+            date: "2022-10-11",
+            content_type: "TEXT",
+            link: "",
+        }
+    ]);
+
+    let [departmentChattingData, setDepartmentChattingData] = useState([]);
+
+    function setChattingDataEachDepartment(targetDepartmentId) {
+        let chatContents = [];
+        for (let index = 0; index < chattingData.length; index++){
+            if (chattingData[index].departmentId == targetDepartmentId){
+                chatContents.push(chattingData[index]);
+            }
+        }
+
+        let htmlArrayForDepartmentChat = [];
+
+        for (let index = 0; index < chatContents.length; index++){
+            let chatContent = chatContents[index].content;
+            let chatDate = chatContents[index].date;
+
+            htmlArrayForDepartmentChat.push(
+                // chat form
+                <div class="media w-50 ml-auto mb-3">
+                    <div class="media-body">
+                        <div class="bg-primary rounded py-2 px-3 mb-2">
+                            <p class="text-small mb-0 text-white">{ chatContent }</p>
+                        </div>
+                        <p class="small text-muted">{ chatDate }</p>
+                    </div>
+                </div>
+                )
+        }
+
+        setDepartmentChattingData(htmlArrayForDepartmentChat);
+    }
+
+    let wholeUserData = [
         {
             userEmail: 'test1@naver.com',
             userPassword: 'qwe123!',
@@ -44,7 +125,7 @@ const WorkSpace = function () {
         },
     ];
 
-    const [departmentUserData, setDepartmentUserData] = useState([
+    let [departmentUserData, setDepartmentUserData] = useState([
         {
             userEmail: 'test1@naver.com',
             userPassword: 'qwe123!',
@@ -57,8 +138,8 @@ const WorkSpace = function () {
         },
     ]);
 
-    function setDepartmentUser(departmentName) {
-        const userData = [
+    function setDepartmentUser(departmentId, departmentName) {
+        let userData = [
             {
                 userEmail: 'test1@naver.com',
                 userPassword: 'qwe123!',
@@ -70,11 +151,12 @@ const WorkSpace = function () {
                 userName: departmentName + ' 박민지'
             },
         ];
-
+        setAccessedDepartmentName(departmentName);
+        setChattingDataEachDepartment(departmentId);
         setDepartmentUserData(userData);
     }
 
-    const workspaceInfo = [
+    let workspaceInfo = [
         {
             workspaceId: '1',
             workspaceName: '오픈소스과제',
@@ -83,7 +165,7 @@ const WorkSpace = function () {
         }
     ];
 
-    const departmentInfo = [
+    let [departmentInfo, setDepartmentInfo] = useState([
         {
             departmentId: '1',
             departmentName: '📢 공지방',
@@ -102,18 +184,19 @@ const WorkSpace = function () {
             departmentGoal: '프로젝트 완성',
             departmentDeadLine: '2022-10-29'
         }
-    ];
+    ]);
     
     function applyDepartmentList() {
         let htmlArrayForDepartmentList = [];
 
         for (let index = 0; index < departmentInfo.length; index++) {
-            const departmentName = departmentInfo[index].departmentName
+            let departmentName = departmentInfo[index].departmentName
+            let departmentId = departmentInfo[index].departmentId
             htmlArrayForDepartmentList.push(
                     // departmentList form
                     <div class="list-group rounded-0">
                     <a class="list-group-item list-group-item-action active text-white rounded-0">
-                        <h6 class="mb-0" onClick={ () => setDepartmentUser(departmentName) }>{ departmentName }</h6>
+                        <h6 class="mb-0" onClick={ () => setDepartmentUser(departmentId, departmentName) }>{ departmentName }</h6>
                     </a>
                     </div>
                 )
@@ -206,50 +289,11 @@ const WorkSpace = function () {
                 {/* right center */}
                 <div class="col-7 px-0">
                     <div class="bg-gray px-4 py-2 bg-light">
-                        <p class="h5 mb-0 py-1">{ departmentInfo[0].departmentName } </p>
+                        <p class="h5 mb-0 py-1">{ accessedDepartmentName } </p>
                     </div>
 
                     <div class="px-4 py-5 chat-box bg-white">
-                        
-                        <div class="media w-50 mb-3"><img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" alt="user" width="50" class="rounded-circle" />
-                            <div class="media-body ml-3">
-                            <div class="bg-light rounded py-2 px-3 mb-2">
-                                <p class="text-small mb-0 text-muted">T</p>
-                            </div>
-                            <p class="small text-muted">12:00 PM | Aug 13</p>
-                            </div>
-                        </div>
-
-                        
-                        <div class="media w-50 ml-auto mb-3">
-                            <div class="media-body">
-                            <div class="bg-primary rounded py-2 px-3 mb-2">
-                                <p class="text-small mb-0 text-white">E</p>
-                            </div>
-                            <p class="small text-muted">12:00 PM | Aug 13</p>
-                            </div>
-                        </div>
-
-                    
-                        <div class="media w-50 mb-3"><img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" alt="user" width="50" class="rounded-circle" />
-                            <div class="media-body ml-3">
-                            <div class="bg-light rounded py-2 px-3 mb-2">
-                                <p class="text-small mb-0 text-muted">S</p>
-                            </div>
-                            <p class="small text-muted">12:00 PM | Aug 13</p>
-                            </div>
-                        </div>
-
-                        
-                        <div class="media w-50 ml-auto mb-3">
-                            <div class="media-body">
-                            <div class="bg-primary rounded py-2 px-3 mb-2">
-                                <p class="text-small mb-0 text-white">T</p>
-                            </div>
-                            <p class="small text-muted">12:00 PM | Aug 13</p>
-                            </div>
-                        </div>
-
+                        { departmentChattingData }
                     </div>
 
                 
