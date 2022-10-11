@@ -4,6 +4,8 @@ import './WorkSpace.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import Modal from 'react-modal';
+// import 'react-chatbox-component/dist/style.css';
+// import {ChatBox} from 'react-chatbox-component';
 import { useLocation } from "react-router";
 
 let WorkSpace = function () {
@@ -20,6 +22,7 @@ let WorkSpace = function () {
             workspaceId: "1", // 오픈소스과제
             departmentId: "1", //공지방
             email: "test1@naver.com",
+            sender: "박대원",
             content: "TEST CHAT1",
             date: "2022-10-11",
             content_type: "TEXT",
@@ -29,6 +32,7 @@ let WorkSpace = function () {
             workspaceId: "1", // 오픈소스과제
             departmentId: "1", //공지방
             email: "test1@naver.com",
+            sender: "박대원",
             content: "TEST CHAT2",
             date: "2022-10-11",
             content_type: "TEXT",
@@ -38,6 +42,7 @@ let WorkSpace = function () {
             workspaceId: "1", // 오픈소스과제
             departmentId: "2",
             email: "test1@naver.com",
+            sender: "박대원",
             content: "TEST CHAT3",
             date: "2022-10-11",
             content_type: "TEXT",
@@ -47,6 +52,7 @@ let WorkSpace = function () {
             workspaceId: "1", // 오픈소스과제
             departmentId: "2", 
             email: "test1@naver.com",
+            sender: "박대원",
             content: "TEST CHAT4",
             date: "2022-10-11",
             content_type: "TEXT",
@@ -56,6 +62,7 @@ let WorkSpace = function () {
             workspaceId: "1", // 오픈소스과제
             departmentId: "3", 
             email: "test1@naver.com",
+            sender: "박대원",
             content: "TEST CHAT5",
             date: "2022-10-11",
             content_type: "TEXT",
@@ -69,6 +76,7 @@ let WorkSpace = function () {
             workspaceId: "1",
             departmentId: accessedDepartmentId, 
             email: loginUserEmail,
+            sender: loginUserName,
             content: chatContent,
             date: "2022-10-11",
             content_type: "TEXT",
@@ -97,14 +105,16 @@ let WorkSpace = function () {
         for (let index = 0; index < chatContents.length; index++){
             let chatContent = chatContents[index].content;
             let chatDate = chatContents[index].date;
+            let chatSender = chatContents[index].sender;
 
             htmlArrayForDepartmentChat.push(
                 // chat form
                 <div class="media w-50 ml-auto mb-3">
                     <div class="media-body">
-                        <div class="bg-primary rounded py-2 px-3 mb-2">
-                            <p class="text-small mb-0 text-white">{ chatContent }</p>
-                        </div>
+                        <p class="small text-muted">{ chatSender }</p>
+                            <div class="bg-primary rounded py-2 px-3 mb-2">
+                                <p class="text-small mb-0 text-white">{ chatContent }</p>
+                            </div>
                         <p class="small text-muted">{ chatDate }</p>
                     </div>
                 </div>
