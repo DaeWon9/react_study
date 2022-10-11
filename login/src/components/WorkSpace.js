@@ -138,7 +138,7 @@ let WorkSpace = function () {
         },
     ]);
 
-    function setDepartmentUser(departmentId, departmentName) {
+    function setDepartmentScreen(departmentId, departmentName) {
         let userData = [
             {
                 userEmail: 'test1@naver.com',
@@ -196,7 +196,7 @@ let WorkSpace = function () {
                     // departmentList form
                     <div class="list-group rounded-0">
                     <a class="list-group-item list-group-item-action active text-white rounded-0">
-                        <h6 class="mb-0" onClick={ () => setDepartmentUser(departmentId, departmentName) }>{ departmentName }</h6>
+                        <h6 class="mb-0" onClick={ () => setDepartmentScreen(departmentId, departmentName) }>{ departmentName }</h6>
                     </a>
                     </div>
                 )
