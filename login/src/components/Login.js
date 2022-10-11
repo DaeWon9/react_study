@@ -45,7 +45,10 @@ const Login = function () {
         for (let userIndex = 0; userIndex < userData.length; userIndex++) {
             if (email == userData[userIndex].userEmail && password == userData[userIndex].userPassword){
                 navigate("/workSpace", { state:
-                    { loginUserName: userData[userIndex].userName} 
+                    {   
+                        loginUserEmail : userData[userIndex].userEmail,
+                        loginUserName: userData[userIndex].userName
+                    } 
                 })
                 return;
             }
