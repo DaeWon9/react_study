@@ -23,8 +23,13 @@ body {
 .messages-box,
 .chat-box {
     height: 510px;
-    overflow-y: scroll;
+    overflow-y: scroll;    
 }
+
+.chat-body {
+    width: auto;
+}
+
 .rounded-lg {
     border-radius: 0.5rem;
 }
