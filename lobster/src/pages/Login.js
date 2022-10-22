@@ -8,7 +8,7 @@ const Login = function () {
 
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
-    let [allMemberData, setAllMemberData] = useState([]);
+    let [allMemberData, setAllMemberData] = useState(getMemberData());
     let navigate = useNavigate();
 
     function checkLoginSuccess() {
@@ -32,14 +32,14 @@ const Login = function () {
         }
     };
 
-    useEffect( () => {
-        getAllMemberData()
-        .then(
-            (res) => {
-                setAllMemberData(res)
-            }
-        )
-    },[])
+    // useEffect( () => {
+    //     getAllMemberData()
+    //     .then(
+    //         (res) => {
+    //             setAllMemberData(res)
+    //         }
+    //     )
+    // },[])
 
     return(
         <div className="Auth-form-container">
