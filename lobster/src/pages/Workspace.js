@@ -174,11 +174,12 @@ const Workspace = function () {
     function applyMemberList(memberData) {
         let htmlArrayForWholeMemberList = [];
 
-        memberData.map( (member) => (
+        memberData.map( (member) => {
+            console.log(member)
             htmlArrayForWholeMemberList.push(
-                MemberCard(member, setDepartmentScreen(accessedDepartmentId, accessedDepartmentName))
+                MemberCard(member, () => setDepartmentScreen(accessedDepartmentId, accessedDepartmentName))
             )
-        ))
+        })
 
         // let htmlArrayForWholeMemberList = [];
 
