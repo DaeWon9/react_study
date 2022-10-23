@@ -1,7 +1,8 @@
 import './Workspace.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import DepartmentAddModal from '../components/DepartmentAddModal';
-import DepartmentMemberAddModal from '../components/DepartmentMemberAddModal';
+import MemberCard from '../components/MemberCard';
+import DepartmentAddModal from '../components/Modals/DepartmentAddModal';
+import DepartmentMemberAddModal from '../components/Modals/DepartmentMemberAddModal';
 import React, { useEffect, useState, useRef } from 'react';
 import Modal from 'react-modal';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -173,17 +174,27 @@ const Workspace = function () {
     function applyMemberList(memberData) {
         let htmlArrayForWholeMemberList = [];
 
-        for (let index = 0; index < memberData.length; index++) {
+        memberData.map( (member) => (
             htmlArrayForWholeMemberList.push(
-                    // memberCard form
-                    <ListGroup>
-                        <ListGroup.Item action variant="danger">
-                            <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" alt="user" width="25" className="rounded-circle" />
-                            <span> { memberData[index].name } </span>
-                        </ListGroup.Item>
-                    </ListGroup>
-                )
-        }
+                MemberCard(member, setDepartmentScreen(accessedDepartmentId, accessedDepartmentName))
+            )
+        ))
+
+        // let htmlArrayForWholeMemberList = [];
+
+        // for (let index = 0; index < memberData.length; index++) {
+        //     htmlArrayForWholeMemberList.push(
+        //             MemberCard({ memberData[index], setDepartmentScreen(departmentId, departmentName) })
+        //             // memberCard form
+        //             // <ListGroup>
+        //             //     <ListGroup.Item action variant="danger">
+        //             //         <img src="https://therichpost.com/wp-content/uploads/2020/06/avatar2.png" alt="user" width="25" className="rounded-circle" />
+        //             //         <span> { memberData[index].name } </span>
+        //             //     </ListGroup.Item>
+        //             // </ListGroup>
+        //         )
+        // }
+        console.log.apply(htmlArrayForWholeMemberList)
         return htmlArrayForWholeMemberList
     }
 

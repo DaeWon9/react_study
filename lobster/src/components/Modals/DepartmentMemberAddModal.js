@@ -3,8 +3,8 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 
 import './Modal.css';
-import { getDepartmentMemberData, setDepartmentMemberData } from '../data/DepartmentMemberData';
-import { getWorkspaceMemberData } from '../data/WorkspaceMemberData';
+import { getDepartmentMemberData, setDepartmentMemberData } from '../../data/DepartmentMemberData';
+import { getWorkspaceMemberData } from '../../data/WorkspaceMemberData';
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 <a
