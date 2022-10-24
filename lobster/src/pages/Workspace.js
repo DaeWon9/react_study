@@ -1,6 +1,7 @@
 import './Workspace.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MemberCard from '../components/MemberCard';
+import Card from '../components/Card';
 import DepartmentAddModal from '../components/Modals/DepartmentAddModal';
 import DepartmentMemberAddModal from '../components/Modals/DepartmentMemberAddModal';
 import React, { useEffect, useState, useRef } from 'react';
@@ -175,9 +176,13 @@ const Workspace = function () {
         let htmlArrayForWholeMemberList = [];
 
         memberData.map( (member) => {
-            console.log(member)
             htmlArrayForWholeMemberList.push(
-                MemberCard(member, () => setDepartmentScreen(accessedDepartmentId, accessedDepartmentName))
+                <Card
+                    profilePicture='https://therichpost.com/wp-content/uploads/2020/06/avatar2.png'
+                    name={member.name}
+                    role={member.role}
+                    onClicked={() => alert(member.name)}
+                />
             )
         })
 
@@ -195,7 +200,6 @@ const Workspace = function () {
         //             // </ListGroup>
         //         )
         // }
-        console.log.apply(htmlArrayForWholeMemberList)
         return htmlArrayForWholeMemberList
     }
 

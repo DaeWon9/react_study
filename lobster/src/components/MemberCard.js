@@ -9,9 +9,8 @@ const MemberCard = ({ member, onMemberCardClicked }) => {
                 name='qwe'
                 // name={member.name}
                 // role={member.role}
+                onClicked={onMemberCardClicked}
             />
-            <br />
-            <button onClick={onMemberCardClicked} />
         </div>
     )
 }
